@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Adicionar Conteudo</title>
+	
+    
+	<script src="js/jquery.js"></script>
+	
+
+	<link href="css/bootstrap.min.css" rel=stylesheet>
+	
+	<script>
+		$(document).ready(function(){
+			
+
+			$("#adicionar").click(function() {
+
+                var tipo = $("#tipo").val();
+                
+                var nome = $("#nome").val();
+                
+                var nota = $("#nota").val();
+
+				var ano = $("#ano").val();
+				
+					
+				
+				$("#dadosConteudo").empty();
+					
+				var url = "/conteudo/"+tipo+"/"+nome+"/"+nota+"/"+ano+"";
+				
+
+				$.getJSON(url, function(data) {
+						
+						var itens = [];
+						
+						
+						
+						itens.push("<tr> <td>"+ data.tipo +"</td><td>"+ data.caract.nome + "</td><td>"+ data.caract.nota + "</td><td>"+ data.caract.ano + "</td></tr>");
+							
+						
+									
+						$("#dadosConteudo").append(itens);
+						
+				});
+
+			});
+
+		});
+
+	</script>
+	
+   
+  </head>
+
+
+  <body>
+		
+
+
+  		<div id="painelAdicionar">
+            
+		
+		
+            
+            <input id="tipo" class="form-control col-md-offset-0" type="text" placeholder="Informe o tipo do conteudo">
+            
+            <input id="nome" class="form-control col-md-offset-0" type="text" placeholder="Informe o nome do conteudo">
+            
+            <input id="nota" class="form-control col-md-offset-0" type="text" placeholder="Informe a nota do conteudo">
+            
+            <input id="ano" class="form-control col-md-offset-0" type="text" placeholder="Informe o ano de lancamento do conteudo">
+            
+		
+		</div>
+		
+		<button id="adicionar" class="btn btn-primary col-md-offset-5">Adicionar</button>
+		
+		
+  </body>
+  
+</html>
