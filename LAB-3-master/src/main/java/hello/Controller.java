@@ -85,24 +85,55 @@ public class Controller {
 		//});
 	//}
 	
-	//public void adicionarConteudo(){
-	//	get("/conteudo/:tipo/:nome/:nota/:ano", (req, res) -> {
-	//		
-	//		model.cadastrarConteudo(new Conteudo(req.params(":tipo"), new Caracteristicas(req.params(":nome"), req.params(":nota"), req.params(":ano"))));
-	//		return "";
-	//		
-	//	});
-	//}
+	public void adicionarConteudo(){
+		
+		get("/conteudos/:tipo/:nome/:nota/:ano", (req, res) -> {
+			model.cadastrarConteudo(req.params(":tipo"),req.params(":nome"),req.params(":nota"),req.params(":ano"));
+			return new Gson().toJson("Sucesso!");
+		});
+	}
 	
-	//public void buscarConteudo(){
-	//	get("/busca/:nome/:nota/:ano", (req, res) -> {
-	//		
-	//		Caracteristicas caract = new Caracteristicas(req.params(":nome"), req.params(":nota"), req.params(":ano"));	
-	//		List<Conteudo> conteudosEncontrados = model.buscarConteudoPorCaracteristicas(caract);	
-	//		return new Gson().toJson(conteudosEncontrados);
-	//			
-	//	});
-	//}
+	public void buscarConteudo(){
+		get("/conteudo/:tipo:/:nome", new Route() {
+				@Override
+		public Object handle(final Request request, final Response response) {
+					
+					response.header("Access-Control-Allow-Origin", "*");
+					
+					
+					String tipo = request.params(":tipo");
+					String nome = request.params(":nome");
+					
+					try {
+						List<Conteudo> conteudos = model.buscarConteudo(tipo, nome);
+						
+						JSONArray jsonResult = new JSONArray();
+						
+						
+						
+							for(Conteudo conteudo:conteudos) {
+								JSONObject jsonObj = new JSONObject();
+								jsonObj.put("tipo", conteudo.getTipo());
+								jsonObj.put("nome", conteudo.getCaract().getNome());
+								jsonObj.put("nota", conteudo.getCaract().getNota());
+								jsonObj.put("ano", conteudo.getCaract().getAno());
+								
+								jsonResult.put(jsonObj);
+							}
+							
+							return jsonResult;
+							
+					} catch(JSONException e) {
+						
+						e.printStackTrace();
+						
+					}
+				
+					return null;
+					
+				}
+		});
+	}
 	
 
 	

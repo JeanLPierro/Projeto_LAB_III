@@ -44,16 +44,6 @@ public class Model {
 		return true;
 	}
 	
-	
-	//public List<Usuario> logar(Login log) {
-		//List<Usuario> UsuarioEncontrado = new LinkedList<Usuario>();
-		//for(Usuario usuario:usuarios){
-		//if(usuario.getLog().match(log)) UsuarioEncontrado.add(usuario);
-		//}
-		//return UsuarioEncontrado;
-	//}
-	
-	
 	public List<Usuario> buscarUsuarioPorNome(String username){
 		List<Usuario> result = new LinkedList<Usuario>();
 		
@@ -71,19 +61,42 @@ public class Model {
 	}
 	
 	
-	//public void cadastrarConteudo(Conteudo conteudo){
-	//	if(verificarConteudoRepetido(conteudo.getCaract())) {
-	//		//conteudos.add(conteudo);
-	//	}
+	//public List<Usuario> logar(Login log) {
+		//List<Usuario> UsuarioEncontrado = new LinkedList<Usuario>();
+		//for(Usuario usuario:usuarios){
+		//if(usuario.getLog().match(log)) UsuarioEncontrado.add(usuario);
+		//}
+		//return UsuarioEncontrado;
 	//}
 	
 	
-	//public boolean verificarConteudoRepetido(Caracteristicas caract){
-	//	for(Conteudo conteudo:conteudos){
-	//		if(conteudo.getCaract().comparar(caract)) return false; 
-	//	}
-	//	return true;
-	//}
+	public boolean cadastroConteudo(Conteudo conteudo){
+		if(isConteudoDisponivel(conteudo.getTipo(), conteudo.getCaract().getNome(), conteudo.getCaract().getAno())) {
+			conteudosbd.store(conteudo);
+			conteudosbd.commit();
+			return true;
+		}
+		return false;
+	}
+	
+	public void cadastrarConteudo(String tipo, String nome, String nota, String ano) {
+
+		cadastroConteudo(new Conteudo (tipo, new Caracteristicas(nome, nota, ano)));
+	}
+	
+	
+	public boolean isConteudoDisponivel(String tipo, String nome, String ano){
+		Query query = conteudosbd.query();
+		query.constrain(Conteudo.class);
+		ObjectSet<Conteudo> Conteudosbd = query.execute();
+		
+;		for(Conteudo conteudo:Conteudosbd){
+			if(conteudo.getTipo().equals(tipo) && conteudo.getCaract().getNome().equals(nome) && conteudo.getCaract().getAno().equals(ano)) {
+				return false; 
+			}
+		}
+		return true;
+	}
 	
 	
 	//public List<Conteudo> buscarConteudoPorTipo(String tipo){
@@ -130,6 +143,22 @@ public class Model {
 	//	return conteudosEncontrados;
 	//	}
 	
+	
+	public List<Conteudo> buscarConteudo(String tipo, String nome){
+		List<Conteudo> result = new LinkedList<Conteudo>();
+		
+		Query query =  conteudosbd.query();
+		query.constrain(Conteudo.class);
+		
+		ObjectSet<Conteudo> allConteudosbd = query.execute();
+		
+		for(Conteudo conteudo:allConteudosbd) {
+			if(conteudo.getTipo().equals(tipo) && conteudo.getCaract().getNome().equals(nome)) result.add(conteudo);
+			
+		}
+		
+		 return result;
+	}
 	
 	//public List<Conteudo> getConteudos(){
 	//return conteudos;

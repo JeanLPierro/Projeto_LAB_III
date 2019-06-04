@@ -13,36 +13,27 @@
 	<script>
 		$(document).ready(function(){
 			
-			$("form").submit(function(e){
-				e.preventDefault();
-			
-
-                var username = $("#username").val();
-                
-                var email = $("#email").val();
-                
-                var senha = $("#senha").val();
-
+			$("#createUser").click(function() {
+				
+				var username = $("#username").val();
+				var email = $("#email").val();
+				var senha = $("#senha").val();
 				var descricao = $("#descricao").val();
-				
 				var genero = $("#genero").val();
-
-					
-				var url = JSON.stringify({"username":username,"email":email,"senha":senha,"descricao":descricao,"genero":genero});
 				
-
-				$.post("/usuario", url, function(data){
-					if(data[0].status == 1){
-						window.location.href = "/statuscreateuser.html?success";
-					} else {
-						window.location.href = "/statuscreateuser.html?error";
-					}
-				}, "json");
-
+				
+										
+				var url = "/usuarios/"+username+"/"+email+"/"+senha+"/"+descricao+"/"+genero;
+				
+				
+				$.getJSON(url, function(data) {
+					alert("Sucesso!");
+					window.location.href = '/CadastraUser.html';
+						
+				});
 			});
-
 		});
-
+		
 	</script>
 	
    
@@ -50,7 +41,7 @@
 
 
   <body>
-  
+  		
  	        <br>
 			<br>
 			<div class="form-horizontal" method="post" id="form">

@@ -15,7 +15,7 @@ public class MainServer {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 8080;
+            port = 1088;
         }
         port(port);
 
@@ -28,9 +28,9 @@ public class MainServer {
 
 		Controller controller = new Controller(model);
 		
-		//controller.buscarConteudo();
+		controller.buscarConteudo();
 		//controller.buscarConteudoTipo();
-		//controller.adicionarConteudo();
+		controller.adicionarConteudo();
 		//controller.buscarConteudoNota();
 		//controller.buscarConteudoAno();
 		//controller.buscarConteudoNome();
@@ -40,15 +40,15 @@ public class MainServer {
     }
     
     public static void inicializarConteudos(){
-    	//model.cadastrarConteudo(new Conteudo("Serie", new Caracteristicas("Friends", "10", "1999")));
+    	model.cadastroConteudo(new Conteudo("Serie", new Caracteristicas("Friends", "10", "1999")));
     	
-    	//model.cadastrarConteudo(new Conteudo("Filme", new Caracteristicas("Pulp Fiction", "9", "1984")));
+    	model.cadastroConteudo(new Conteudo("Filme", new Caracteristicas("Pulp Fiction", "9", "1984")));
     	
-    	//model.cadastrarConteudo(new Conteudo("Serie", new Caracteristicas("Doctor Who", "9", "2000")));
+    	model.cadastroConteudo(new Conteudo("Serie", new Caracteristicas("Doctor Who", "9", "2000")));
     	
-    	//model.cadastrarConteudo(new Conteudo("Podcast", new Caracteristicas("NerdCast", "9", "2018")));
+    	model.cadastroConteudo(new Conteudo("Podcast", new Caracteristicas("NerdCast", "9", "2018")));
     	
-    	//model.cadastrarConteudo(new Conteudo("Filme", new Caracteristicas("Matrix", "9", "1999")));
+    	model.cadastroConteudo(new Conteudo("Filme", new Caracteristicas("Matrix", "9", "1999")));
     	
     	//inicializacao de usuarios
     	model.cadastroUsuario(new Usuario("Sgt.Pepper", "yellowsub@gmail.com", "SunKing", "Happiness is a warm gun", "Masculino"));
