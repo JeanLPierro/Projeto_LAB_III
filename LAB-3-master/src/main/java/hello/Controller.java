@@ -94,49 +94,20 @@ public class Controller {
 	}
 	
 	public void buscarConteudo(){
-		get("/conteudo/:tipo:/:nome", new Route() {
-				@Override
-		public Object handle(final Request request, final Response response) {
-					
-					response.header("Access-Control-Allow-Origin", "*");
-					
-					
-					String tipo = request.params(":tipo");
-					String nome = request.params(":nome");
-					
-					try {
-						List<Conteudo> conteudos = model.buscarConteudo(tipo, nome);
-						
-						JSONArray jsonResult = new JSONArray();
-						
-						
-						
-							for(Conteudo conteudo:conteudos) {
-								JSONObject jsonObj = new JSONObject();
-								jsonObj.put("tipo", conteudo.getTipo());
-								jsonObj.put("nome", conteudo.getCaract().getNome());
-								jsonObj.put("nota", conteudo.getCaract().getNota());
-								jsonObj.put("ano", conteudo.getCaract().getAno());
-								
-								jsonResult.put(jsonObj);
-							}
-							
-							return jsonResult;
-							
-					} catch(JSONException e) {
-						
-						e.printStackTrace();
-						
-					}
-				
-					return null;
-					
-				}
+		get("/conteudo/:tipo/:nome", (req, res) -> {
+			List<Conteudo> conteudosEncontrados = model.buscarConteudo(req.params(":tipo"), req.params(":nome"));	
+			return new Gson().toJson(conteudosEncontrados);
+		});
+	}
+	
+	public void buscarConteudoPorTipo(){
+		get("/conteudo/:tipo", (req, res) -> {
+			List<Conteudo> conteudosEncontrados = model.buscarConteudoPorTipo(req.params(":tipo"));	
+			return new Gson().toJson(conteudosEncontrados);
 		});
 	}
 	
 
-	
 	//public void buscarConteudoTipo(){
 	//	get("/conteudo/:tipo", (req, res) -> {
 	//	

@@ -15,7 +15,7 @@ public class MainServer {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 1088;
+            port = 8080;
         }
         port(port);
 
@@ -29,11 +29,10 @@ public class MainServer {
 		Controller controller = new Controller(model);
 		
 		controller.buscarConteudo();
-		//controller.buscarConteudoTipo();
+		controller.buscarConteudoPorTipo();
 		controller.adicionarConteudo();
 		//controller.buscarConteudoNota();
 		//controller.buscarConteudoAno();
-		//controller.buscarConteudoNome();
 		controller.adicionarUsuario();//usar esse metodo para a criacao da view de cadastro de usuario
 		controller.buscarUsuarioNome();//metodo de teste da classe usuario(remover apos termino dos metodos relacionados a classe)
 		//controller.logarUsuario();

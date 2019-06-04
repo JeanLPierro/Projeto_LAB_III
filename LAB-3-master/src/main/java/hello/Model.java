@@ -99,6 +99,39 @@ public class Model {
 	}
 	
 	
+	public List<Conteudo> buscarConteudo(String tipo, String nome){
+		List<Conteudo> result = new LinkedList<Conteudo>();
+		
+		Query query =  conteudosbd.query();
+		query.constrain(Conteudo.class);
+		
+		ObjectSet<Conteudo> allConteudosbd = query.execute();
+		
+		for(Conteudo conteudo:allConteudosbd) {
+			if(conteudo.getTipo().equals(tipo) && conteudo.getCaract().getNome().equals(nome)) result.add(conteudo);
+			
+		}
+		
+		 return result;
+	}
+	
+	
+	public List<Conteudo> buscarConteudoPorTipo(String tipo){
+		List<Conteudo> result = new LinkedList<Conteudo>();
+		
+		Query query =  conteudosbd.query();
+		query.constrain(Conteudo.class);
+		
+		ObjectSet<Conteudo> allConteudosbd = query.execute();
+		
+		for(Conteudo conteudo:allConteudosbd) {
+			if(conteudo.getTipo().equals(tipo)) result.add(conteudo);
+			
+		}
+		
+		 return result;
+	}
+	
 	//public List<Conteudo> buscarConteudoPorTipo(String tipo){
 	//List<Conteudo> conteudosEncontrados = new LinkedList<Conteudo>();
 	//for(Conteudo conteudo:conteudos){
@@ -143,22 +176,6 @@ public class Model {
 	//	return conteudosEncontrados;
 	//	}
 	
-	
-	public List<Conteudo> buscarConteudo(String tipo, String nome){
-		List<Conteudo> result = new LinkedList<Conteudo>();
-		
-		Query query =  conteudosbd.query();
-		query.constrain(Conteudo.class);
-		
-		ObjectSet<Conteudo> allConteudosbd = query.execute();
-		
-		for(Conteudo conteudo:allConteudosbd) {
-			if(conteudo.getTipo().equals(tipo) && conteudo.getCaract().getNome().equals(nome)) result.add(conteudo);
-			
-		}
-		
-		 return result;
-	}
 	
 	//public List<Conteudo> getConteudos(){
 	//return conteudos;

@@ -13,42 +13,26 @@
 	<script>
 		$(document).ready(function(){
 			
-
-			$("#adicionar").click(function() {
-
-                var tipo = $("#tipo").val();
-                
-                var nome = $("#nome").val();
-                
-                var nota = $("#nota").val();
-
+			$("#createContent").click(function() {
+				
+				var tipo = $( "#tipo option:selected" ).text();
+				var nome = $("#nome").val();
+				var nota = $("#nota").val();
 				var ano = $("#ano").val();
 				
-					
 				
-				$("#dadosConteudo").empty();
-					
-				var url = "/conteudo/"+tipo+"/"+nome+"/"+nota+"/"+ano+"";
+										
+				var url = "/conteudos/"+tipo+"/"+nome+"/"+nota+"/"+ano+"";
 				
-
+				
 				$.getJSON(url, function(data) {
-						
-						var itens = [];
-						
-						
-						
-						itens.push("<tr> <td>"+ data.tipo +"</td><td>"+ data.caract.nome + "</td><td>"+ data.caract.nota + "</td><td>"+ data.caract.ano + "</td></tr>");
-							
-						
-									
-						$("#dadosConteudo").append(itens);
+					alert("Sucesso!");
+					window.location.href = '/addConteudo.html';
 						
 				});
-
 			});
-
 		});
-
+		
 	</script>
 	
    
@@ -56,26 +40,62 @@
 
 
   <body>
-		
-
-
-  		<div id="painelAdicionar">
-            
-		
-		
-            
-            <input id="tipo" class="form-control col-md-offset-0" type="text" placeholder="Informe o tipo do conteudo">
-            
-            <input id="nome" class="form-control col-md-offset-0" type="text" placeholder="Informe o nome do conteudo">
-            
-            <input id="nota" class="form-control col-md-offset-0" type="text" placeholder="Informe a nota do conteudo">
-            
-            <input id="ano" class="form-control col-md-offset-0" type="text" placeholder="Informe o ano de lancamento do conteudo">
-            
-		
-		</div>
-		
-		<button id="adicionar" class="btn btn-primary col-md-offset-5">Adicionar</button>
+  		
+ 	        <br>
+			<br>
+			<div class="form-horizontal" method="get" id="form">
+				<div class="form-group form-group">
+				<label for="" class="col-md-4 control-label">Tipo</label>
+				<div class="col-md-4">
+                <select id="tipo" class="input-large form-control">
+                    <option value="" selected="selected">Escolha o tipo</option>
+                    <option value="Serie">Serie</option>
+                    <option value="Filme">Filme</option>
+                    <option value="Podcast">Podcast</option>
+                </select>
+           	 	</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="form-group form-group">
+					<label for="" class="col-md-4 control-label">Nome</label>
+					<div class="col-md-4">
+						<input required="required" type="" class="form-control" id="nome" placeholder="Nome">
+					</div>
+					<div class="col-md-4">
+						<label for="inputEmail3" class="control-label">Ex: A Volta Dos Que Nao Foram</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="" class="col-md-4 control-label">Nota</label>
+				<div class="col-md-4">
+					<input required="required" type="" class="form-control" id="nota" placeholder="Nota">
+				</div>
+				<div class="col-md-4">
+					<label for="inputEmail3" class="control-label">Ex: 9.5</label>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="" class="col-md-4 control-label">Ano</label>
+				<div class="col-md-4">
+					<input required="required" type="" class="form-control" id="ano" placeholder="Ano">
+				</div>
+				<div class="col-md-4">
+					<label for="inputEmail3" class="control-label">Ex: 1984</label>
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button id=createContent type="submit" class="btn btn-primary col-md-offset-5">Cadastrar Conteudo/button>
+				</div>
+			</div>
+			
+		</form>
 		
 		
   </body>

@@ -18,12 +18,11 @@
 			$("#busca").click(function() {
 
 				var tipo = $( "#tipo option:selected" ).text();
-				var nome = $("#nome").val();
 				
 					
 				$("#dadosConteudo").empty();
 					
-				var url = "/conteudo/"+tipo+"/"+nome+"";
+				var url = "/conteudo/"+tipo+"";
 				
 					
 
@@ -73,19 +72,6 @@
            	 	</div>
 			</div>
             
-        <div class="form-group">
-				<div class="form-group form-group">
-					<label for="" class="col-md-4 control-label">Nome</label>
-					<div class="col-md-4">
-						<input required="required" type="" class="form-control" id="nome" placeholder="Nome">
-					</div>
-					<div class="col-md-4">
-						<label for="inputEmail3" class="control-label">Ex: A Volta Dos Que Nao Foram</label>
-					</div>
-				</div>
-			</div>
-		
-        </div>
         
 		<button id="busca" type="submit" class="btn btn-success col-md-offset-5">Buscar</button>
 		
