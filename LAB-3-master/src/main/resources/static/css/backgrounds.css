@@ -1,0 +1,21 @@
+#background_principal {
+  	background-image: url('Movies.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	min-height: 650px;
+}
+
+#Logo {
+  	background-image: url('Jarvis.png');
+  	background-repeat: no-repeat;
+  	background-position: top right;
+  	background-attachment: fixed;
+	min-height: 650px;
+}
+
+label {
+  color: black;
+  padding: 8px;
+  background-color: white;
+}

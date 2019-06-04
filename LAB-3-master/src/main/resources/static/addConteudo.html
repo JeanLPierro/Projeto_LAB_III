@@ -7,7 +7,7 @@
     
 	<script src="js/jquery.js"></script>
 	
-
+	<link rel="stylesheet" type="text/css" href="css/backgrounds.css">
 	<link href="css/bootstrap.min.css" rel=stylesheet>
 	
 	<script>
@@ -40,10 +40,10 @@
 
 
   <body>
-  		
+  		<div id="background_principal">
  	        <br>
 			<br>
-			<div class="form-horizontal" method="get" id="form">
+			<div class="form-horizontal" method="get" id="background_principal">
 				<div class="form-group form-group">
 				<label for="" class="col-md-4 control-label">Tipo</label>
 				<div class="col-md-4">
@@ -53,6 +53,7 @@
                     <option value="Filme">Filme</option>
                     <option value="Podcast">Podcast</option>
                 </select>
+                <label for="inputEmail3" class="control-label">Ex: Serie/Filme/Podcast</label>
            	 	</div>
 			</div>
 			
@@ -91,8 +92,9 @@
 			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button id=createContent type="submit" class="btn btn-primary col-md-offset-5">Cadastrar Conteudo/button>
+					<button id=createContent type="submit" class="btn btn-primary col-md-offset-5">Cadastrar Conteudo</button>
 				</div>
+			</div>
 			</div>
 			
 		</form>

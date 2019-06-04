@@ -35,44 +35,9 @@ public class Controller {
 	}
 	
 	public void buscarUsuarioNome(){
-		get("/usuario/:username", new Route() {
-				@Override
-		public Object handle(final Request request, final Response response) {
-					
-					response.header("Access-Control-Allow-Origin", "*");
-					
-					
-					String username = request.params(":username");
-					
-					try {
-						List<Usuario> usuarios = model.buscarUsuarioPorNome(username);
-						
-						JSONArray jsonResult = new JSONArray();
-						
-						
-						
-							for(Usuario usuario:usuarios) {
-								JSONObject jsonObj = new JSONObject();
-								jsonObj.put("username", usuario.getUsername());
-								jsonObj.put("email", usuario.getEmail());
-								jsonObj.put("senha", usuario.getSenha());
-								jsonObj.put("descricao", usuario.getDescricao());
-								jsonObj.put("genero", usuario.getGenero());
-								
-								jsonResult.put(jsonObj);
-							}
-							
-							return jsonResult;
-							
-					} catch(JSONException e) {
-						
-						e.printStackTrace();
-						
-					}
-				
-					return null;
-					
-				}
+		get("/usuario/:username", (req, res) -> {
+			List<Usuario> usuariosEncontrados = model.buscarUsuarioPorNome(req.params(":username"));	
+			return new Gson().toJson(usuariosEncontrados);
 		});
 	}
 	
